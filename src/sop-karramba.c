@@ -1,5 +1,5 @@
-#include "common.h"
 #include "board_utils.h"
+#include "common.h"
 
 #define BOARD_FILE "board"
 #define FIFO_NAME "fifo"
@@ -10,7 +10,7 @@
 
 #define EPOLL_MAX_EVENTS 10
 
-void usage(char* program_name)
+void usage(char *program_name)
 {
     fprintf(stderr, "Usage: \n");
 
@@ -20,4 +20,4 @@ void usage(char* program_name)
     exit(EXIT_FAILURE);
 }
 
-int main(int argc, char** argv) { usage(argv[0]); }
+int main(int argc, char **argv) { usage(argv[0]); }
