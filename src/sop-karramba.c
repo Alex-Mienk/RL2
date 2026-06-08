@@ -39,7 +39,7 @@ int main(int argc, char** argv)
 
     int fd;
 
-    if ((fd = open(BOARD_FILE, O_RDWR | O_CREAT | O_TRUNC, 0644)) < 0)
+    if ((fd = open(BOARD_FILE, O_RDWR | O_CREAT | O_TRUNC, 0666)) < 0)
     {
         ERR("Open");
     }
@@ -49,10 +49,10 @@ int main(int argc, char** argv)
 
     char* board = mmap(NULL, boardSize, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 
-    if (!board)
-        ERR("mmap");
-
     fill_board(board, n, m);
+
+    if (close(fd) < 0)
+        ERR("close");
 
     // seed
     srand(time(NULL));
@@ -73,9 +73,6 @@ int main(int argc, char** argv)
 
     if (munmap(board, boardSize) < 0)
         ERR("munmap");
-
-    if (close(fd) < 0)
-        ERR("close");
 
     return EXIT_SUCCESS;
 }
